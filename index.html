@@ -15,7 +15,10 @@
 
 <body>
     <div id="app" class="container">
-        <h1>Datavalid Demonstracao</h1>
+
+        <a href="https://apidocs.datavalidp.estaleiro.serpro.gov.br/demonstracao/" target="_blank">
+            <h1>Datavalid Demonstracao</h1>
+        </a>
 
         <label for="foto">
             <img v-show="body.answer.biometria_face" id="foto" src="#" alt="your image" class="mt-3 form-control" />
@@ -37,7 +40,7 @@
         <br />
         <label for="dataNascimento" class="mt-3">
             Data Nascimento:
-            <input id="dataNascimento" type="date" class="form-control" v-model="body.answer.data_nascimento" />
+            <input id="dataNascimento" type="date" ex class="form-control" v-model="body.answer.data_nascimento" />
         </label>
 
         <br />
