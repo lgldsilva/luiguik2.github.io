@@ -43,6 +43,11 @@
 
         <button class="mt-3" id="verificar" @click="sendRequest">Verificar</button>
         <br />
+
+        <div class="spinner-border mt-3" role="status" v-if="!processado && isLoading">
+            <span class="sr-only">Loading...</span>
+        </div>
+
         <textarea class="mt-3" id="retorno" v-if="processado" style="min-width: 100%" v-model="retorno" rows="20">
         </textarea>
     </div>
@@ -54,6 +59,8 @@
         var app = new Vue({
             el: "#app",
             data: {
+                refCount: 0,
+                isLoading: false,
                 processado: false,
                 retorno: "",
                 body: {
@@ -124,21 +131,24 @@
                         url: "https://apigateway.serpro.gov.br/datavalid-demonstracao/v2/validate/pf-face",
                     };
 
+                    this.isLoading = true;
                     axios(options)
                         .then((response) => {
                             this.processado = true;
                             this.retorno = JSON.stringify(response.data, null, 2);
+                            this.isLoading = false;
                         }).catch((e) => {
                             if (e.response) {
                                 this.processado = true;
                                 this.retorno = JSON.stringify(e.response.data, null, 2);
+                                this.isLoading = false;
                             }
                         });
                 },
                 applyMasc: function (event, mask) {
                     $(event.target).mask(mask);
                 }
-            },
+            }
         });
     </script>
 
